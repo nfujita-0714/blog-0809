@@ -4,6 +4,10 @@ class ArticlesController < ApplicationController
         @articles = Article.all
     end
 
+    def confirm
+        @article = Article.new(article_params)
+      end
+
     def show
         @article = Article.find(params[:id])
     end
@@ -16,7 +20,7 @@ class ArticlesController < ApplicationController
         @article = Article.new(article_params)
         
         if @article.save
-            redirect_to @article
+            redirect_to articles_path, notice: "I created a blog!"
         
         else
             render 'new'
@@ -40,7 +44,7 @@ class ArticlesController < ApplicationController
     def destroy
         @article = Article.find(params[:id])
         @article.destroy
-            redirect_to articles_path
+        redirect_to articles_path
     end
 
     private
